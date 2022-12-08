@@ -5,6 +5,6 @@ export { createCRDTTest } from "./crdt.js";
 export { createCRDTMapTest } from "./crdt-map.js";
 export { createGCounterTest } from "./g-counter.js";
 export { createGSetTest } from "./g-set.js";
-export { createLWWMapTest } from "./lww-map";
+export { createLWWMapTest } from "./lww-map.js";
 export { createLWWRegisterTest } from "./lww-register.js";
 export { createPNCounterTest } from "./pn-counter.js";
