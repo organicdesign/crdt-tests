@@ -42,6 +42,8 @@ This test checks the the serialization functionality of a CRDT works give that t
 
 ### G-Counter
 
+Status: **Basic**
+
 ```javascript
 import { createGCounterTest } from "crdt-tests";
 ```
@@ -49,6 +51,8 @@ import { createGCounterTest } from "crdt-tests";
 This test is for a G-Counter CRDT that implements the CRDT & MCounter interfaces.
 
 ### PN-Counter
+
+Status: **Basic**
 
 ```javascript
 import { createPNCounterTest } from "crdt-tests";
@@ -58,6 +62,8 @@ This test is for a PN-Counter CRDT that implements the CRDT & BCounter interface
 
 ### G-Set
 
+Status: **Incomplete**
+
 ```javascript
 import { createGSetTest } from "crdt-tests";
 ```
@@ -65,6 +71,8 @@ import { createGSetTest } from "crdt-tests";
 This test is for a G-Set CRDT that implements the CRDT & MSet interfaces.
 
 ### LWW-Register
+
+Status: **Incomplete**
 
 ```javascript
 import { createLWWRegisterTest } from "crdt-tests";
@@ -74,6 +82,8 @@ This test is for a LWW-Register CRDT that implements the CRDT & Register interfa
 
 ### LWW-Map
 
+Status: **Incomplete**
+
 ```javascript
 import { createLWWMapTest } from "crdt-tests";
 ```
@@ -81,6 +91,8 @@ import { createLWWMapTest } from "crdt-tests";
 This test is for a LWW-Map CRDT that implements the CRDT & BMap interfaces.
 
 ### CRDT-Map
+
+Status: **Incomplete**
 
 ```javascript
 import { createLWWMapTest } from "crdt-tests";
