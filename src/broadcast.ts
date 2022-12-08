@@ -1,3 +1,4 @@
+import { jest } from "@jest/globals";
 import type { CRDT } from "crdt-interfaces";
 
 export const createBroadcastTest = <T extends CRDT=CRDT>(

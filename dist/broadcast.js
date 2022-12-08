@@ -1,3 +1,4 @@
+import { jest } from "@jest/globals";
 export const createBroadcastTest = (create, action, instanceCount) => {
     if (instanceCount == null) {
         instanceCount = 20;
