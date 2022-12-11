@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 const createDummyCRDT = () => {
     let pData = new Uint8Array([0]);
     const broadcasters = [];
@@ -10,6 +11,7 @@ const createDummyCRDT = () => {
         return false;
     };
     return {
+        id: uint8ArrayFromString("dummy"),
         action: (index) => {
             const data = new Uint8Array([index + 1]);
             update(data);

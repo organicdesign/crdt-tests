@@ -1,9 +1,10 @@
 import { jest } from "@jest/globals";
+import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 export const createBroadcastTest = (create, action, instanceCount) => {
     if (instanceCount == null) {
         instanceCount = 20;
     }
-    const name = create("dummy").constructor.name;
+    const name = create(uint8ArrayFromString("dummy")).constructor.name;
     const runBroadcastTest = (count) => {
         const crdts = [];
         const createBroadcast = (crdt) => (data) => {
@@ -16,7 +17,7 @@ export const createBroadcastTest = (create, action, instanceCount) => {
             }
         };
         for (let i = 1; i <= count; i++) {
-            const crdt = create(`test-${i}`);
+            const crdt = create(uint8ArrayFromString(`test-${i}`));
             crdt.addBroadcaster(createBroadcast(crdt));
             crdts.push(crdt);
         }
@@ -30,7 +31,7 @@ export const createBroadcastTest = (create, action, instanceCount) => {
     };
     it("Broadcasts every time an action is made", () => {
         const broadcast = jest.fn();
-        const crdt = create("test");
+        const crdt = create(uint8ArrayFromString("test"));
         const times = 5;
         crdt.addBroadcaster(broadcast);
         for (let i = 0; i < times; i++) {

@@ -1,12 +1,13 @@
 import { createCRDTTest } from "./crdt.js";
+import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 export const createPNCounterTest = (create, deserialize) => {
     describe("Counter", () => {
         it("Starts at 0", () => {
-            const counter = create("test");
+            const counter = create(uint8ArrayFromString("test"));
             expect(counter.toValue()).toBe(0);
         });
         it("Adds integers", () => {
-            const counter = create("test");
+            const counter = create(uint8ArrayFromString("test"));
             const integers = [1, -100, 53];
             const sum = integers.reduce((p, c) => p + c, 0);
             for (const integer of integers) {
@@ -20,7 +21,7 @@ export const createPNCounterTest = (create, deserialize) => {
             expect(counter.toValue()).toBe(sum);
         });
         it("Adds floats", () => {
-            const counter = create("test");
+            const counter = create(uint8ArrayFromString("test"));
             const floats = [1, 100.23, -53.00001, 0.12];
             const sum = floats.reduce((p, c) => p + c, 0);
             for (const float of floats) {
