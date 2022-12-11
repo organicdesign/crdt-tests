@@ -2,7 +2,7 @@ import { createCRDTTest } from "./crdt.js";
 import type { Register, CRDT, Deserialize } from "crdt-interfaces";
 
 export const createLWWRegisterTest = (
-	create: (id: string) => Register<unknown> & CRDT,
+	create: (id: Uint8Array) => Register<unknown> & CRDT,
 	deserialize?: Deserialize<Register<unknown> & CRDT>
 ) => {
 	createCRDTTest(

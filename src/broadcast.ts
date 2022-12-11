@@ -1,8 +1,9 @@
 import { jest } from "@jest/globals";
 import type { CRDT } from "crdt-interfaces";
+import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createBroadcastTest = <T extends CRDT=CRDT>(
-	create: (id: string) => T,
+	create: (id: Uint8Array) => T,
 	action: (crdt: T, index: number) => void,
 	instanceCount?: number
 ) => {
@@ -10,7 +11,7 @@ export const createBroadcastTest = <T extends CRDT=CRDT>(
 		instanceCount = 20;
 	}
 
-	const name = create("dummy").constructor.name;
+	const name = create(uint8ArrayFromString("dummy")).constructor.name;
 
 	const runBroadcastTest = (count: number) => {
 		const crdts: T[] = [];
@@ -27,7 +28,7 @@ export const createBroadcastTest = <T extends CRDT=CRDT>(
 		};
 
 		for (let i = 1; i <= count; i++) {
-			const crdt = create(`test-${i}`);
+			const crdt = create(uint8ArrayFromString(`test-${i}`));
 
 			crdt.addBroadcaster!(createBroadcast(crdt));
 
@@ -47,7 +48,7 @@ export const createBroadcastTest = <T extends CRDT=CRDT>(
 
 	it("Broadcasts every time an action is made", () => {
 		const broadcast = jest.fn();
-		const crdt = create("test");
+		const crdt = create(uint8ArrayFromString("test"));
 		const times = 5;
 
 		crdt.addBroadcaster!(broadcast);

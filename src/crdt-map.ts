@@ -1,5 +1,6 @@
 import { createCRDTTest } from "./crdt.js";
 import type { MMap, CRDT, Deserialize } from "crdt-interfaces";
+import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 interface Actionable {
 	action (index: number): void
@@ -19,6 +20,8 @@ const createDummyCRDT = (): CRDT & Actionable => {
 	};
 
 	return {
+		id: uint8ArrayFromString("dummy"),
+
 		action: (index: number) => {
 			const data = new Uint8Array([index + 1]);
 
@@ -48,10 +51,10 @@ const createDummyCRDT = (): CRDT & Actionable => {
 };
 
 export const createCRDTMapTest = (
-	create: (id: string) => MMap<CRDT> & CRDT,
+	create: (id: Uint8Array) => MMap<CRDT> & CRDT,
 	deserialize?: Deserialize<MMap<CRDT> & CRDT>
 ) => {
-	const createWithDummies = (id: string) => {
+	const createWithDummies = (id: Uint8Array) => {
 		const crdt = create(id);
 
 		crdt.set("dummy1", createDummyCRDT());
