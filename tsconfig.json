@@ -8,7 +8,12 @@
 		"declaration": true,
 		"module": "ES2022",
 		"outDir": "./dist",
-		"target": "ES6"
+		"target": "ES6",
+    "baseUrl": ".",
+    "paths": {
+      "crdt-interfaces": ["../crdt-interfaces/src/index.d.js"],
+      "crdt-tests": ["../crdt-tests/dist/index.js"]
+    }
 	},
 
 	"ts-node": {

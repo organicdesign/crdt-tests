@@ -1,13 +1,12 @@
 import { createSyncTest } from "./sync.js";
 import { createSerializeTest } from "./serialize.js";
 import { createBroadcastTest } from "./broadcast.js";
-import type { CRDT, Deserialize } from "crdt-interfaces";
+import type { CRDT } from "crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createCRDTTest = <T extends CRDT=CRDT>(
 	create: (id: Uint8Array) => T,
-	action: (crdt: T, index: number) => void,
-	deserialize?: Deserialize<T>
+	action: (crdt: T, index: number) => void
 ) => {
 	describe("Sync", () => {
 		createSyncTest(
@@ -27,12 +26,11 @@ export const createCRDTTest = <T extends CRDT=CRDT>(
 		});
 	}
 
-	if (dummy.serialize != null && deserialize != null) {
+	if (dummy.serialize != null && dummy.deserialize != null) {
 		describe("Serialization", () => {
 			createSerializeTest(
 				(id: Uint8Array) => create(id),
-				action,
-				deserialize
+				action
 			);
 		});
 	}

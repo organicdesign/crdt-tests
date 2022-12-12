@@ -1,10 +1,9 @@
 import { createCRDTTest } from "./crdt.js";
-import type { MCounter, CRDT, Deserialize } from "crdt-interfaces";
+import type { MCounter, CRDT } from "crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createGCounterTest = (
-	create: (id: Uint8Array) => MCounter & CRDT,
-	deserialize?: Deserialize<MCounter & CRDT>
+	create: (id: Uint8Array) => MCounter & CRDT
 ) => {
 	describe("Counter", () => {
 		it("Starts at 0", () => {
@@ -53,7 +52,6 @@ export const createGCounterTest = (
 
 	createCRDTTest(
 		create,
-		(crdt: MCounter & CRDT, index: number) => crdt.increment(index + 1),
-		deserialize
+		(crdt: MCounter & CRDT, index: number) => crdt.increment(index + 1)
 	);
 };

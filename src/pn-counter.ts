@@ -1,10 +1,9 @@
 import { createCRDTTest } from "./crdt.js";
-import type { BCounter, CRDT, Deserialize } from "crdt-interfaces";
+import type { BCounter, CRDT } from "crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createPNCounterTest = (
-	create: (id: Uint8Array) => BCounter & CRDT,
-	deserialize?: Deserialize<BCounter & CRDT>
+	create: (id: Uint8Array) => BCounter & CRDT
 ) => {
 	describe("Counter", () => {
 		it("Starts at 0", () => {
@@ -49,7 +48,6 @@ export const createPNCounterTest = (
 
 	createCRDTTest(
 		create,
-		(crdt: BCounter & CRDT, index: number) => crdt.increment(index + 1),
-		deserialize
+		(crdt: BCounter & CRDT, index: number) => crdt.increment(index + 1)
 	);
 };
