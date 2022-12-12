@@ -1,6 +1,6 @@
 import { createCRDTTest } from "./crdt.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
-export const createPNCounterTest = (create, deserialize) => {
+export const createPNCounterTest = (create) => {
     describe("Counter", () => {
         it("Starts at 0", () => {
             const counter = create(uint8ArrayFromString("test"));
@@ -36,5 +36,5 @@ export const createPNCounterTest = (create, deserialize) => {
             expect(Math.floor(counter.toValue() * 10000) / 10000).toBe(Math.floor(sum * 10000) / 10000);
         });
     });
-    createCRDTTest(create, (crdt, index) => crdt.increment(index + 1), deserialize);
+    createCRDTTest(create, (crdt, index) => crdt.increment(index + 1));
 };

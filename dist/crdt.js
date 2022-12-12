@@ -2,7 +2,7 @@ import { createSyncTest } from "./sync.js";
 import { createSerializeTest } from "./serialize.js";
 import { createBroadcastTest } from "./broadcast.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
-export const createCRDTTest = (create, action, deserialize) => {
+export const createCRDTTest = (create, action) => {
     describe("Sync", () => {
         createSyncTest((id) => create(id), action);
     });
@@ -12,9 +12,9 @@ export const createCRDTTest = (create, action, deserialize) => {
             createBroadcastTest((id) => create(id), action);
         });
     }
-    if (dummy.serialize != null && deserialize != null) {
+    if (dummy.serialize != null && dummy.deserialize != null) {
         describe("Serialization", () => {
-            createSerializeTest((id) => create(id), action, deserialize);
+            createSerializeTest((id) => create(id), action);
         });
     }
 };

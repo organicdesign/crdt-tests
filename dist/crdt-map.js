@@ -32,7 +32,7 @@ const createDummyCRDT = () => {
         }
     };
 };
-export const createCRDTMapTest = (create, deserialize) => {
+export const createCRDTMapTest = (create) => {
     const createWithDummies = (id) => {
         const crdt = create(id);
         crdt.set("dummy1", createDummyCRDT());
@@ -47,5 +47,5 @@ export const createCRDTMapTest = (create, deserialize) => {
         }
         subCrdt.action(index);
     };
-    createCRDTTest(createWithDummies, action, deserialize);
+    createCRDTTest(createWithDummies, action);
 };

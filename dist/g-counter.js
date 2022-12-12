@@ -1,6 +1,6 @@
 import { createCRDTTest } from "./crdt.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
-export const createGCounterTest = (create, deserialize) => {
+export const createGCounterTest = (create) => {
     describe("Counter", () => {
         it("Starts at 0", () => {
             const counter = create(uint8ArrayFromString("test"));
@@ -35,5 +35,5 @@ export const createGCounterTest = (create, deserialize) => {
             expect(counter.toValue()).toBe(sum);
         });
     });
-    createCRDTTest(create, (crdt, index) => crdt.increment(index + 1), deserialize);
+    createCRDTTest(create, (crdt, index) => crdt.increment(index + 1));
 };
