@@ -48,6 +48,20 @@ export const createPNCounterTest = (
 
 	createCRDTTest(
 		create,
-		(crdt: BCounter & CRDT, index: number) => crdt.increment(index + 1)
+		(crdt: BCounter & CRDT, index: number) => {
+			let value = index + 1;
+
+			// Use floats a third of the time.
+			if (index % 3 === 0) {
+				value += index / 100;
+			}
+
+			// increment and decrement equally.
+			if (index % 2 === 0) {
+				crdt.increment(value);
+			} else {
+				crdt.decrement(value);
+			}
+		}
 	);
 };
