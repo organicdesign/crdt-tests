@@ -7,7 +7,9 @@ export const createBroadcastTest = (create, action, instanceCount) => {
     const name = create(uint8ArrayFromString("dummy")).constructor.name;
     const runBroadcastTest = (count) => {
         const crdts = [];
+        let transfer = 0;
         const createBroadcast = (crdt) => (data) => {
+            transfer += data.length;
             for (const rCrdt of crdts) {
                 // Don't broadcast to self.
                 if (rCrdt === crdt) {
@@ -28,6 +30,7 @@ export const createBroadcastTest = (create, action, instanceCount) => {
         for (const crdt of crdts) {
             expect(crdt.toValue()).toStrictEqual(value);
         }
+        console.info(`Synced ${count} ${name}s over broadcast in ${transfer} bytes.`);
     };
     it("Broadcasts every time an action is made", () => {
         const broadcast = jest.fn();

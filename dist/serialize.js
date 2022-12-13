@@ -22,7 +22,9 @@ export const createSerializeTest = (create, action) => {
         const crdt1 = create(uint8ArrayFromString("test"));
         const crdt2 = create(uint8ArrayFromString("test2"));
         action(crdt1, 0);
-        crdt2.deserialize(crdt1.serialize());
+        const data = crdt1.serialize();
+        crdt2.deserialize(data);
         expect(crdt1.toValue()).toStrictEqual(crdt2.toValue());
+        console.info(`Serialized a ${name} in ${data.length} bytes.`);
     });
 };

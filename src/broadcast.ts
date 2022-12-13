@@ -15,8 +15,11 @@ export const createBroadcastTest = <T extends CRDT=CRDT>(
 
 	const runBroadcastTest = (count: number) => {
 		const crdts: T[] = [];
+		let transfer = 0;
 
 		const createBroadcast = (crdt: T) => (data: Uint8Array) => {
+			transfer += data.length;
+
 			for (const rCrdt of crdts) {
 				// Don't broadcast to self.
 				if (rCrdt === crdt) {
@@ -44,6 +47,8 @@ export const createBroadcastTest = <T extends CRDT=CRDT>(
 		for (const crdt of crdts) {
 			expect(crdt.toValue()).toStrictEqual(value);
 		}
+
+		console.info(`Synced ${count} ${name}s over broadcast in ${transfer} bytes.`);
 	};
 
 	it("Broadcasts every time an action is made", () => {

@@ -12,11 +12,12 @@ export const createSyncTest = (create, action, instanceCount) => {
             action(crdt, i);
             crdts.push(crdt);
         }
-        syncCrdts(crdts);
+        const transfer = syncCrdts(crdts);
         const result = crdts[0].toValue();
         for (const crdt of crdts) {
             expect(crdt.toValue()).toStrictEqual(result);
         }
+        console.info(`Synced ${count} ${name}s in ${transfer} bytes.`);
     };
     it(`Syncs 2 ${name}s`, () => {
         runSyncTest(2);
