@@ -1,7 +1,14 @@
 import type { CRDT } from "crdt-interfaces";
 
+let genSyncId = (() => {
+	let id = 0;
+
+	return () => id++;
+})();
+
 export const syncCrdt = (crdt1: CRDT, crdt2: CRDT): number => {
-	let data = crdt1.sync(undefined, { id: crdt2.id });
+	const syncId = genSyncId();
+	let data = crdt1.sync(undefined, { id: crdt2.id, syncId });
 	let i = 0;
 	let transfer = 0;
 
@@ -12,7 +19,7 @@ export const syncCrdt = (crdt1: CRDT, crdt2: CRDT): number => {
 
 		transfer += data.length;
 
-		const response = crdt2.sync(data, { id: crdt1.id });
+		const response = crdt2.sync(data, { id: crdt1.id, syncId });
 
 		if (response == null) {
 			break;
@@ -20,7 +27,7 @@ export const syncCrdt = (crdt1: CRDT, crdt2: CRDT): number => {
 
 		transfer += response.length;
 
-		data = crdt1.sync(response, { id: crdt2.id });
+		data = crdt1.sync(response, { id: crdt2.id, syncId });
 
 		i++;
 	}

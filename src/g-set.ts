@@ -6,6 +6,14 @@ export const createGSetTest = (
 ) => {
 	createCRDTTest(
 		create,
-		(crdt: MSet<unknown> & CRDT, index: number) => crdt.add(index + 1)
+		(crdt: MSet<unknown> & CRDT, index: number) => {
+			let value: unknown = index + 1;
+
+			if (index % 2 === 0) {
+				value = `index: ${index}`;
+			}
+
+			crdt.add(value);
+		}
 	);
 };

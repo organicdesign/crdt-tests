@@ -36,5 +36,18 @@ export const createPNCounterTest = (create) => {
             expect(Math.floor(counter.toValue() * 10000) / 10000).toBe(Math.floor(sum * 10000) / 10000);
         });
     });
-    createCRDTTest(create, (crdt, index) => crdt.increment(index + 1));
+    createCRDTTest(create, (crdt, index) => {
+        let value = index + 1;
+        // Use floats a third of the time.
+        if (index % 3 === 0) {
+            value += index / 100;
+        }
+        // increment and decrement equally.
+        if (index % 2 === 0) {
+            crdt.increment(value);
+        }
+        else {
+            crdt.decrement(value);
+        }
+    });
 };
