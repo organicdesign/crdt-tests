@@ -1,7 +1,7 @@
 import { createSyncTest } from "./sync.js";
 import { createSerializeTest } from "./serialize.js";
 import { createBroadcastTest } from "./broadcast.js";
-import type { CRDT } from "crdt-interfaces";
+import type { CRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createCRDTTest = <T extends CRDT=CRDT>(

@@ -1,5 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
-import type { BMap, CRDT } from "crdt-interfaces";
+import type { BMap, CRDT } from "@organicdesign/crdt-interfaces";
 
 export const createLWWMapTest = (
 	create: (id: Uint8Array) => BMap<unknown> & CRDT

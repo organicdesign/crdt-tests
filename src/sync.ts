@@ -1,5 +1,5 @@
 import { syncCrdts } from "./utils.js";
-import type { CRDT } from "crdt-interfaces";
+import type { CRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createSyncTest = <T extends CRDT=CRDT>(

@@ -1,5 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
-import type { BCounter, CRDT } from "crdt-interfaces";
+import type { BCounter, CRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createPNCounterTest = (
