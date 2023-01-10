@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "crdt-tests",
+  "name": "@organicdesign/crdt-tests",
   "version": "0.1.0",
   "description": "Tests for CRDTs implementing crdt-interfaces.",
   "main": "dist/index.js",
@@ -9,9 +9,10 @@
     "build": "mkdir -p dist && touch dist/cleanup && rm dist/* && tsc -b",
     "lint": "eslint ./src/*"
   },
+  "homepage": "https://code.organicdesign.nz/organicdesign/crdt-tests",
   "repository": {
     "type": "git",
-    "url": "ssh://git@code.organicdesign.nz:222/organicdesign/crdt-tests.git"
+    "url": "https://github.com/organicdesign/crdt-tests.git"
   },
   "author": "Saul Boyd",
   "license": "GPL-3.0-or-later",
