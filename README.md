@@ -1,6 +1,6 @@
 # crdt-tests
 
-Tests for CRDTs implementing crdt-interfaces.
+Tests for CRDTs implementing `@organicdesign/crdt-interfaces`.
 
 ## Install
 
@@ -10,7 +10,7 @@ npm i --save-dev @organicdesign/crdt-tests
 
 ## Usage
 
-To use a test you jsut need to import the apropriate test method and call it on a CRDT implementation. If you are testing against a specific CRDT (for example G-Counter) then you do not need to test against the general CRDT tests since those are included in the specific tests. The general tests are to assist with the creation of abitrary CRDTs that may not have a specific test ready for them.
+To use a test you just need to import the relevant test method and call it on a CRDT implementation. If you are testing against a specific CRDT (for example G-Counter) then you do not need to test against the general CRDT tests since those are included in the specific tests. The general tests are to assist with the creation of abitrary CRDTs that may not have a specific test ready for them.
 
 Most of these tests are created for implementations that use arbitrary data types, if the implementation is for a specific data type then a specific test should also be created for it.
 
