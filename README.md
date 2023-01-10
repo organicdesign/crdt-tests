@@ -78,6 +78,16 @@ import { createGSetTest } from "@organicdesign/crdt-tests";
 
 This test is for a G-Set CRDT that implements the CRDT & MSet interfaces.
 
+### MV-Register
+
+Status: **Incomplete**
+
+```javascript
+import { createMVRegisterTest } from "@organicdesign/crdt-tests";
+```
+
+This test is for a MV-Register CRDT that implements the CRDT & MVRegister interfaces.
+
 ### LWW-Register
 
 Status: **Incomplete**
@@ -86,7 +96,7 @@ Status: **Incomplete**
 import { createLWWRegisterTest } from "@organicdesign/crdt-tests";
 ```
 
-This test is for a LWW-Register CRDT that implements the CRDT & Register interfaces.
+This test is for a LWW-Register CRDT that implements the CRDT & BRegister interfaces.
 
 ### LWW-Map
 
@@ -110,7 +120,8 @@ This test is for a CRDT-Map CRDT that implements the CRDT & MMap interfaces.
 
 ## TODO
 
-- [ ] MV-Register generic test.
+- [x] MV-Register generic test.
+- [ ] MV-Register register specific methods tests.
 - [ ] G-Set set specific methods tests.
 - [ ] LWW-Register register specific methods tests.
 - [ ] LWW-Map map specific methods tests.
