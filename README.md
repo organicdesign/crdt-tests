@@ -2,6 +2,12 @@
 
 Tests for CRDTs implementing crdt-interfaces.
 
+## Install
+
+```
+npm i --save-dev @organicdesign/crdt-tests
+```
+
 ## Usage
 
 To use a test you jsut need to import the apropriate test method and call it on a CRDT implementation. If you are testing against a specific CRDT (for example G-Counter) then you do not need to test against the general CRDT tests since those are included in the specific tests. The general tests are to assist with the creation of abitrary CRDTs that may not have a specific test ready for them.

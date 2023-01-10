@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@organicdesign/crdt-tests",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Tests for CRDTs implementing crdt-interfaces.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
