@@ -113,8 +113,8 @@ This test is for a CRDT-Map CRDT that implements the CRDT & MMap interfaces.
 - [ ] MV-Register generic test.
 - [ ] G-Set set specific methods tests.
 - [ ] LWW-Register register specific methods tests.
-- [ ] LWW-Map register specific methods tests.
-- [ ] CRDT-Map register specific methods tests.
+- [ ] LWW-Map map specific methods tests.
+- [ ] CRDT-Map map specific methods tests.
 - [ ] MV-Register type specific tests.
 - [ ] G-Counter type specific tests.
 - [ ] PN-Counter type specific tests.
