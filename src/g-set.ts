@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { generateAll } from "./generate-data.js";
 import type { MSet, CRDT } from "@organicdesign/crdt-interfaces";
 
 export const createGSetTest = (
@@ -6,14 +7,6 @@ export const createGSetTest = (
 ) => {
 	createCRDTTest(
 		create,
-		(crdt: MSet<unknown> & CRDT, index: number) => {
-			let value: unknown = index + 1;
-
-			if (index % 2 === 0) {
-				value = `index: ${index}`;
-			}
-
-			crdt.add(value);
-		}
+		(crdt: MSet<unknown> & CRDT, index: number) => crdt.add(generateAll(index))
 	);
 };

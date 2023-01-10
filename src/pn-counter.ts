@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { generateNumber } from "./generate-data.js";
 import type { BCounter, CRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
@@ -49,18 +50,11 @@ export const createPNCounterTest = (
 	createCRDTTest(
 		create,
 		(crdt: BCounter & CRDT, index: number) => {
-			let value = index + 1;
-
-			// Use floats a third of the time.
-			if (index % 3 === 0) {
-				value += index / 100;
-			}
-
 			// increment and decrement equally.
 			if (index % 2 === 0) {
-				crdt.increment(value);
+				crdt.increment(generateNumber(index));
 			} else {
-				crdt.decrement(value);
+				crdt.decrement(generateNumber(index));
 			}
 		}
 	);

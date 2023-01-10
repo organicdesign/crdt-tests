@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { generateNumber } from "./generate-data.js";
 import type { MMap, CRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
@@ -71,7 +72,7 @@ export const createCRDTMapTest = (
 			return;
 		}
 
-		subCrdt.action(index);
+		subCrdt.action(generateNumber(index));
 	};
 
 	createCRDTTest(

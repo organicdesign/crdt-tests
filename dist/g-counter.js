@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { generateNumber } from "./generate-data.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 export const createGCounterTest = (create) => {
     describe("Counter", () => {
@@ -35,5 +36,5 @@ export const createGCounterTest = (create) => {
             expect(counter.toValue()).toBe(sum);
         });
     });
-    createCRDTTest(create, (crdt, index) => index % 2 === 0 ? crdt.increment(index + 1) : crdt.increment(index + 1 + index / 100));
+    createCRDTTest(create, (crdt, index) => crdt.increment(generateNumber(index)));
 };

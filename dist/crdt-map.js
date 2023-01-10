@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { generateNumber } from "./generate-data.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 const createDummyCRDT = () => {
     let pData = new Uint8Array([0]);
@@ -45,7 +46,7 @@ export const createCRDTMapTest = (create) => {
         if (subCrdt == null) {
             return;
         }
-        subCrdt.action(index);
+        subCrdt.action(generateNumber(index));
     };
     createCRDTTest(createWithDummies, action);
 };

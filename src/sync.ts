@@ -32,7 +32,7 @@ export const createSyncTest = <T extends CRDT=CRDT>(
 			expect(crdt.toValue()).toStrictEqual(result);
 		}
 
-		console.info(`Synced ${count} ${name}s in ${transfer} bytes.`)
+		console.info(`Synced ${count} ${name}s in ${transfer} bytes.`);
 	};
 
 	it(`Syncs 2 ${name}s`, () => {

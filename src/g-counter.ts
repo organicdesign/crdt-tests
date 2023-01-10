@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { generateNumber } from "./generate-data.js";
 import type { MCounter, CRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
@@ -52,6 +53,6 @@ export const createGCounterTest = (
 
 	createCRDTTest(
 		create,
-		(crdt: MCounter & CRDT, index: number) => index % 2 === 0 ? crdt.increment(index + 1) : crdt.increment(index + 1 + index / 100)
+		(crdt: MCounter & CRDT, index: number) => crdt.increment(generateNumber(index))
 	);
 };

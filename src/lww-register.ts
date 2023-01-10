@@ -1,4 +1,5 @@
 import { createCRDTTest } from "./crdt.js";
+import { generateAll } from "./generate-data.js";
 import type { BRegister, CRDT } from "@organicdesign/crdt-interfaces";
 
 export const createLWWRegisterTest = (
@@ -6,6 +7,6 @@ export const createLWWRegisterTest = (
 ) => {
 	createCRDTTest(
 		create,
-		(crdt: BRegister<unknown> & CRDT, index: number) => crdt.set(index + 1)
+		(crdt: BRegister<unknown> & CRDT, index: number) => crdt.set(generateAll(index))
 	);
 };
