@@ -6,12 +6,14 @@ Tests for CRDTs implementing crdt-interfaces.
 
 To use a test you jsut need to import the apropriate test method and call it on a CRDT implementation. If you are testing against a specific CRDT (for example G-Counter) then you do not need to test against the general CRDT tests since those are included in the specific tests. The general tests are to assist with the creation of abitrary CRDTs that may not have a specific test ready for them.
 
+Most of these tests are created for implementations that use arbitrary data types, if the implementation is for a specific data type then a specific test should also be created for it.
+
 ## Tests
 
 ### CRDT
 
 ```javascript
-import { createCRDTTest } from "crdt-tests";
+import { createCRDTTest } from "@organicdesign/crdt-tests";
 ```
 
 This test is a general CRDT test for CRDTs conforming to the CRDT interface. This will check that functionality of it works.
@@ -19,7 +21,7 @@ This test is a general CRDT test for CRDTs conforming to the CRDT interface. Thi
 ### Sync
 
 ```javascript
-import { createSyncTest } from "crdt-tests";
+import { createSyncTest } from "@organicdesign/crdt-tests";
 ```
 
 This test checks that the synchronization functionality of a CRDT works.
@@ -27,7 +29,7 @@ This test checks that the synchronization functionality of a CRDT works.
 ### Broadcast
 
 ```javascript
-import { createBroadcastTest } from "crdt-tests";
+import { createBroadcastTest } from "@organicdesign/crdt-tests";
 ```
 
 This test checks that the broadcast functionality of a CRDT works, given that the CRDT implements this optional feature.
@@ -35,7 +37,7 @@ This test checks that the broadcast functionality of a CRDT works, given that th
 ### Serialize
 
 ```javascript
-import { createSerializeTest } from "crdt-tests";
+import { createSerializeTest } from "@organicdesign/crdt-tests";
 ```
 
 This test checks the the serialization functionality of a CRDT works give that the CRDT implements this optional feature.
@@ -45,7 +47,7 @@ This test checks the the serialization functionality of a CRDT works give that t
 Status: **Basic**
 
 ```javascript
-import { createGCounterTest } from "crdt-tests";
+import { createGCounterTest } from "@organicdesign/crdt-tests";
 ```
 
 This test is for a G-Counter CRDT that implements the CRDT & MCounter interfaces.
@@ -55,7 +57,7 @@ This test is for a G-Counter CRDT that implements the CRDT & MCounter interfaces
 Status: **Basic**
 
 ```javascript
-import { createPNCounterTest } from "crdt-tests";
+import { createPNCounterTest } from "@organicdesign/crdt-tests";
 ```
 
 This test is for a PN-Counter CRDT that implements the CRDT & BCounter interfaces.
@@ -65,7 +67,7 @@ This test is for a PN-Counter CRDT that implements the CRDT & BCounter interface
 Status: **Incomplete**
 
 ```javascript
-import { createGSetTest } from "crdt-tests";
+import { createGSetTest } from "@organicdesign/crdt-tests";
 ```
 
 This test is for a G-Set CRDT that implements the CRDT & MSet interfaces.
@@ -75,7 +77,7 @@ This test is for a G-Set CRDT that implements the CRDT & MSet interfaces.
 Status: **Incomplete**
 
 ```javascript
-import { createLWWRegisterTest } from "crdt-tests";
+import { createLWWRegisterTest } from "@organicdesign/crdt-tests";
 ```
 
 This test is for a LWW-Register CRDT that implements the CRDT & Register interfaces.
@@ -85,7 +87,7 @@ This test is for a LWW-Register CRDT that implements the CRDT & Register interfa
 Status: **Incomplete**
 
 ```javascript
-import { createLWWMapTest } from "crdt-tests";
+import { createLWWMapTest } from "@organicdesign/crdt-tests";
 ```
 
 This test is for a LWW-Map CRDT that implements the CRDT & BMap interfaces.
@@ -95,7 +97,7 @@ This test is for a LWW-Map CRDT that implements the CRDT & BMap interfaces.
 Status: **Incomplete**
 
 ```javascript
-import { createLWWMapTest } from "crdt-tests";
+import { createLWWMapTest } from "@organicdesign/crdt-tests";
 ```
 
 This test is for a CRDT-Map CRDT that implements the CRDT & MMap interfaces.
