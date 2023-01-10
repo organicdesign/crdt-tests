@@ -1,9 +1,9 @@
 import { createCRDTTest } from "./crdt.js";
 import { generateAll } from "./generate-data.js";
-import type { MSet, CRDT } from "@organicdesign/crdt-interfaces";
+import type { MSet, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
 
 export const createGSetTest = (
-	create: (id: Uint8Array) => MSet<unknown> & CRDT
+	create: CreateCRDT<MSet<unknown> & CRDT>
 ) => {
 	createCRDTTest(
 		create,

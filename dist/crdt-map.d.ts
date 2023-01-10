@@ -1,2 +1,2 @@
-import type { MMap, CRDT } from "@organicdesign/crdt-interfaces";
-export declare const createCRDTMapTest: (create: (id: Uint8Array) => MMap<CRDT> & CRDT) => void;
+import type { MMap, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
+export declare const createCRDTMapTest: (create: CreateCRDT<MMap<CRDT> & CRDT>) => void;

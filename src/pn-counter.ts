@@ -1,20 +1,20 @@
 import { createCRDTTest } from "./crdt.js";
 import { generateNumber } from "./generate-data.js";
-import type { BCounter, CRDT } from "@organicdesign/crdt-interfaces";
+import type { BCounter, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createPNCounterTest = (
-	create: (id: Uint8Array) => BCounter & CRDT
+	create: CreateCRDT<BCounter & CRDT>
 ) => {
 	describe("Counter", () => {
 		it("Starts at 0", () => {
-			const counter = create(uint8ArrayFromString("test"));
+			const counter = create({ id: uint8ArrayFromString("test") });
 
 			expect(counter.toValue()).toBe(0);
 		});
 
 		it("Adds integers", () => {
-			const counter = create(uint8ArrayFromString("test"));
+			const counter = create({ id: uint8ArrayFromString("test") });
 			const integers = [1, -100, 53];
 			const sum = integers.reduce((p, c) => p + c, 0);
 
@@ -30,7 +30,7 @@ export const createPNCounterTest = (
 		});
 
 		it("Adds floats", () => {
-			const counter = create(uint8ArrayFromString("test"));
+			const counter = create({ id: uint8ArrayFromString("test") });
 			const floats = [1, 100.23, -53.00001, 0.12];
 			const sum = floats.reduce((p, c) => p + c, 0);
 

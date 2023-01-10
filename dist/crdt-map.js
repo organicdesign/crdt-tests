@@ -34,8 +34,8 @@ const createDummyCRDT = () => {
     };
 };
 export const createCRDTMapTest = (create) => {
-    const createWithDummies = (id) => {
-        const crdt = create(id);
+    const createWithDummies = ({ id }) => {
+        const crdt = create({ id });
         crdt.set("dummy1", createDummyCRDT());
         crdt.set("dummy2", createDummyCRDT());
         return crdt;

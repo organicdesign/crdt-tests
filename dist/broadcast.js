@@ -4,7 +4,7 @@ export const createBroadcastTest = (create, action, instanceCount) => {
     if (instanceCount == null) {
         instanceCount = 20;
     }
-    const name = create(uint8ArrayFromString("dummy")).constructor.name;
+    const name = create({ id: uint8ArrayFromString("dummy") }).constructor.name;
     const runBroadcastTest = (count) => {
         const crdts = [];
         let transfer = 0;
@@ -19,7 +19,7 @@ export const createBroadcastTest = (create, action, instanceCount) => {
             }
         };
         for (let i = 1; i <= count; i++) {
-            const crdt = create(uint8ArrayFromString(`test-${i}`));
+            const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
             crdt.addBroadcaster(createBroadcast(crdt));
             crdts.push(crdt);
         }
@@ -34,7 +34,7 @@ export const createBroadcastTest = (create, action, instanceCount) => {
     };
     it("Broadcasts every time an action is made", () => {
         const broadcast = jest.fn();
-        const crdt = create(uint8ArrayFromString("test"));
+        const crdt = create({ id: uint8ArrayFromString("test") });
         const times = 5;
         crdt.addBroadcaster(broadcast);
         for (let i = 0; i < times; i++) {

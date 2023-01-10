@@ -1,9 +1,9 @@
 import { createCRDTTest } from "./crdt.js";
 import { generateAll } from "./generate-data.js";
-import type { BRegister, CRDT } from "@organicdesign/crdt-interfaces";
+import type { BRegister, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
 
 export const createLWWRegisterTest = (
-	create: (id: Uint8Array) => BRegister<unknown> & CRDT
+	create: CreateCRDT<BRegister<unknown> & CRDT>
 ) => {
 	createCRDTTest(
 		create,

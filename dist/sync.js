@@ -4,11 +4,11 @@ export const createSyncTest = (create, action, instanceCount) => {
     if (instanceCount == null) {
         instanceCount = 20;
     }
-    const name = create(uint8ArrayFromString("dummy")).constructor.name;
+    const name = create({ id: uint8ArrayFromString("dummy") }).constructor.name;
     const runSyncTest = (count) => {
         const crdts = [];
         for (let i = 1; i <= count; i++) {
-            const crdt = create(uint8ArrayFromString(`test-${i}`));
+            const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
             action(crdt, i);
             crdts.push(crdt);
         }

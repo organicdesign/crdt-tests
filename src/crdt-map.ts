@@ -1,6 +1,6 @@
 import { createCRDTTest } from "./crdt.js";
 import { generateNumber } from "./generate-data.js";
-import type { MMap, CRDT } from "@organicdesign/crdt-interfaces";
+import type { MMap, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 interface Actionable {
@@ -52,10 +52,10 @@ const createDummyCRDT = (): CRDT & Actionable => {
 };
 
 export const createCRDTMapTest = (
-	create: (id: Uint8Array) => MMap<CRDT> & CRDT
+	create: CreateCRDT<MMap<CRDT> & CRDT>
 ) => {
-	const createWithDummies = (id: Uint8Array) => {
-		const crdt = create(id);
+	const createWithDummies: CreateCRDT = ({ id }: { id: Uint8Array }) => {
+		const crdt = create({ id });
 
 		crdt.set("dummy1", createDummyCRDT());
 		crdt.set("dummy2", createDummyCRDT());

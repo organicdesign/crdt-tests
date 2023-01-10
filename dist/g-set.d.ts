@@ -1,2 +1,2 @@
-import type { MSet, CRDT } from "@organicdesign/crdt-interfaces";
-export declare const createGSetTest: (create: (id: Uint8Array) => MSet<unknown> & CRDT) => void;
+import type { MSet, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
+export declare const createGSetTest: (create: CreateCRDT<MSet<unknown> & CRDT>) => void;
