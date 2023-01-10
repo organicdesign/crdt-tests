@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@organicdesign/crdt-tests",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Tests for CRDTs implementing crdt-interfaces.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
   "author": "Saul Boyd",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@organicdesign/crdt-interfaces": "^1.0.0",
+    "@organicdesign/crdt-interfaces": "^2.0.0",
     "@swc/core": "^1.3.14",
     "@types/jest": "^29.2.2",
     "@typescript-eslint/eslint-plugin": "^5.42.1",
