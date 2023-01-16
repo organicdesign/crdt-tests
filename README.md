@@ -2,6 +2,24 @@
 
 Tests for CRDTs implementing `@organicdesign/crdt-interfaces`.
 
+## Table of Contents
+
+- [Install](#install)
+- [Usage](#usage)
+- [Tests](#tests)
+  - [CRDT](#crdt)
+  - [Sync](#sync)
+  - [Broadcast](#broadcast)
+  - [Serialize](#serialize)
+  - [G-Counter](#g-counter)
+  - [PN-Counter](#pn-counter)
+  - [G-Set](#g-set)
+  - [MV-Register](#mv-register)
+  - [LWW-Register](#lww-register)
+  - [LWW-Map](#lww-map)
+  - [CRDT-Map](#crdt-map)
+- [TODO](#todo)
+
 ## Install
 
 ```
