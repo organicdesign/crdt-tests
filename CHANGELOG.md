@@ -1,3 +1,10 @@
+## [0.2.1](https://github.com/organicdesign/crdt-tests/compare/v0.2.0...v0.2.1) (2023-01-17)
+
+### Added
+
+* Keywords to package.
+* Table of contents to readme.
+
 ## [0.2.0](https://github.com/organicdesign/crdt-tests/compare/v0.1.4...v0.2.0) (2023-01-11)
 
 ### Added
