@@ -1,4 +1,4 @@
-import type { SynchronizableCRDT } from "@organicdesign/crdt-interfaces";
+import type { SynchronizableCRDT } from "../../crdt-interfaces/src/index.js";
 
 let genSyncId = (() => {
 	let id = 0;

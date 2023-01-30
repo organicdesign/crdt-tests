@@ -1,13 +1,8 @@
 import { syncCrdts } from "./utils.js";
-import {
-	CRDT,
-	SynchronizableCRDT,
-	CreateCRDT,
-	isSynchronizable
-} from "@organicdesign/crdt-interfaces";
+import { SynchronizableCRDT, CreateCRDT } from "../../crdt-interfaces/src/index.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
-export const createSyncTest = <T extends CRDT=CRDT>(
+export const createSyncTest = <T extends SynchronizableCRDT=SynchronizableCRDT>(
 	create: CreateCRDT<T>,
 	action: (crdt: T, index: number) => void,
 	instanceCount?: number
@@ -24,13 +19,9 @@ export const createSyncTest = <T extends CRDT=CRDT>(
 		for (let i = 1; i <= count; i++) {
 			const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
 
-			if (!isSynchronizable(crdt)) {
-				continue;
-			}
-
 			action(crdt as T, i);
 
-			crdts.push(crdt as unknown as SynchronizableCRDT);
+			crdts.push(crdt);
 		}
 
 		const transfer = syncCrdts(crdts);
