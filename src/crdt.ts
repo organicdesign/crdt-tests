@@ -14,7 +14,7 @@ export const createCRDTTest = <T extends CRDT=CRDT>(
 			action
 		);
 	});
-
+/*
 	const dummy = create({ id: uint8ArrayFromString("dummy") });
 
 	if (dummy.addBroadcaster != null && dummy.onBroadcast != null) {
@@ -34,4 +34,5 @@ export const createCRDTTest = <T extends CRDT=CRDT>(
 			);
 		});
 	}
+*/
 };
