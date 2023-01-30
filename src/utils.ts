@@ -1,4 +1,4 @@
-import type { CRDT } from "@organicdesign/crdt-interfaces";
+import type { SynchronizableCRDT } from "@organicdesign/crdt-interfaces";
 
 let genSyncId = (() => {
 	let id = 0;
@@ -6,9 +6,27 @@ let genSyncId = (() => {
 	return () => id++;
 })();
 
-export const syncCrdt = (crdt1: CRDT, crdt2: CRDT): number => {
+export const syncCrdt = (crdt1: SynchronizableCRDT, crdt2: SynchronizableCRDT): number => {
+	const protocols = [
+		...new Set([
+			...crdt1.getSynchronizerProtocols(),
+			...crdt2.getSynchronizerProtocols()]
+		).values()
+	];
+
+	if (protocols.length === 0) {
+		throw new Error("no common synchronize protocols");
+	}
+
+	const synchronizer1 = crdt1.getSynchronizer(protocols[0]);
+	const synchronizer2 = crdt2.getSynchronizer(protocols[0]);
+
+	if (synchronizer1 == null || synchronizer2 == null) {
+		throw new Error("error getting synchronizer protocol");
+	}
+
 	const syncId = genSyncId();
-	let data = crdt1.sync(undefined, { id: crdt2.id, syncId });
+	let data = synchronizer1.sync(undefined, { id: crdt2.id, syncId });
 	let i = 0;
 	let transfer = 0;
 
@@ -19,7 +37,7 @@ export const syncCrdt = (crdt1: CRDT, crdt2: CRDT): number => {
 
 		transfer += data.length;
 
-		const response = crdt2.sync(data, { id: crdt1.id, syncId });
+		const response = synchronizer2.sync(data, { id: crdt1.id, syncId });
 
 		if (response == null) {
 			break;
@@ -27,7 +45,7 @@ export const syncCrdt = (crdt1: CRDT, crdt2: CRDT): number => {
 
 		transfer += response.length;
 
-		data = crdt1.sync(response, { id: crdt2.id, syncId });
+		data = synchronizer1.sync(response, { id: crdt2.id, syncId });
 
 		i++;
 	}
@@ -35,7 +53,7 @@ export const syncCrdt = (crdt1: CRDT, crdt2: CRDT): number => {
 	return transfer;
 };
 
-export const syncCrdts = (crdts: CRDT[]): number => {
+export const syncCrdts = (crdts: SynchronizableCRDT[]): number => {
 	let transfer = 0;
 
 	for (const crdt1 of crdts) {
