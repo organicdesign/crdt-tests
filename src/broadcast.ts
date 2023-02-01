@@ -1,8 +1,8 @@
 import { jest } from "@jest/globals";
-import type { CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
+import type { CreateCRDT, BroadcastableCRDT } from "../../crdt-interfaces/src/index.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
-export const createBroadcastTest = <T extends CRDT=CRDT>(
+export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRDT>(
 	create: CreateCRDT<T>,
 	action: (crdt: T, index: number) => void,
 	instanceCount?: number
@@ -26,14 +26,18 @@ export const createBroadcastTest = <T extends CRDT=CRDT>(
 					continue;
 				}
 
-				rCrdt.onBroadcast!(data);
+				for (const protocol of rCrdt.getBroadcastProtocols()) {
+					rCrdt.getBroadcaster(protocol)?.onBroadcast(data)
+				}
 			}
 		};
 
 		for (let i = 1; i <= count; i++) {
 			const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
 
-			crdt.addBroadcaster!(createBroadcast(crdt));
+			for (const protocol of crdt.getBroadcastProtocols()) {
+				crdt.getBroadcaster(protocol)?.setBroadcast(createBroadcast(crdt))
+			}
 
 			crdts.push(crdt);
 		}
@@ -56,7 +60,9 @@ export const createBroadcastTest = <T extends CRDT=CRDT>(
 		const crdt = create({ id: uint8ArrayFromString("test") });
 		const times = 5;
 
-		crdt.addBroadcaster!(broadcast);
+		for (const protocol of crdt.getBroadcastProtocols()) {
+			crdt.getBroadcaster(protocol)?.setBroadcast(broadcast)
+		}
 
 		for (let i = 0; i < times; i++) {
 			action(crdt, i);

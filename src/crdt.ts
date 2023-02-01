@@ -1,7 +1,16 @@
 import { createSyncTest } from "./sync.js";
 import { createSerializeTest } from "./serialize.js";
 import { createBroadcastTest } from "./broadcast.js";
-import { CRDT, SynchronizableCRDT, SerializableCRDT, CreateCRDT, isSerializable, isSynchronizable } from "../../crdt-interfaces/src/index.js";
+import {
+	CRDT,
+	SynchronizableCRDT,
+	SerializableCRDT,
+	BroadcastableCRDT,
+	CreateCRDT,
+	isSerializable,
+	isSynchronizable,
+	isBroadcastable
+} from "../../crdt-interfaces/src/index.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createCRDTTest = <T extends CRDT=CRDT>(
@@ -18,16 +27,15 @@ export const createCRDTTest = <T extends CRDT=CRDT>(
 			);
 		});
 	}
-/*
-	if (dummy.addBroadcaster != null && dummy.onBroadcast != null) {
+
+	if (isBroadcastable(dummy)) {
 		describe("Broadcast", () => {
 			createBroadcastTest(
-				create,
-				action
+				create as unknown as CreateCRDT<BroadcastableCRDT>,
+				action as unknown as (crdt: BroadcastableCRDT, index: number) => void
 			);
 		});
 	}
-*/
 
 	if (isSerializable(dummy)) {
 		describe("Serialization", () => {
