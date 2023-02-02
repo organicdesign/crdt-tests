@@ -1,18 +1,19 @@
 import { createCRDTTest } from "./crdt.js";
 import { generateNumber } from "./generate-data.js";
-import type { MMap, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
+import type { MMap, CRDT, SynchronizableCRDT, BroadcastableCRDT, CreateCRDT } from "../../crdt-interfaces/src/index.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
+import { toString as uint8ArrayToString } from "uint8arrays/to-string";
 
 interface Actionable {
 	action (index: number): void
 }
 
-const createDummyCRDT = (): CRDT & Actionable => {
+const createDummyCRDT = (): SynchronizableCRDT & BroadcastableCRDT & Actionable => {
 	let pData = new Uint8Array([0]);
 	const broadcasters: ((data: Uint8Array) => void)[] = [];
 
 	const update = (data: Uint8Array) => {
-		if (data.toString() > pData.toString()) {
+		if (uint8ArrayToString(data) > uint8ArrayToString(pData)) {
 			pData = data;
 			return true;
 		}
@@ -33,21 +34,42 @@ const createDummyCRDT = (): CRDT & Actionable => {
 			}
 		},
 
-		sync: (data: Uint8Array) => {
-			if (data == null) {
-				return pData;
-			}
-
-			update(data);
+		getSynchronizerProtocols() {
+			return ["/test"];
 		},
 
-		toValue: () => pData,
+		getSynchronizer (_: string) {
+			return {
+				protocol: "/test",
+				sync (data?: Uint8Array): Uint8Array | undefined {
+					if (data == null) {
+						return pData;
+					}
 
-		addBroadcaster: (broadcaster: (data: Uint8Array) => void) => broadcasters.push(broadcaster),
+					update(data);
+				}
+			};
+		},
 
-		onBroadcast: (data: Uint8Array) => {
-			update(data);
-		}
+		getBroadcastProtocols() {
+			return ["/test"];
+		},
+
+		getBroadcaster (_: string) {
+			return {
+				protocol: "/test",
+
+				setBroadcast (broadcaster) {
+					broadcasters.push(broadcaster);
+				},
+
+				onBroadcast (data: Uint8Array): void {
+					update(data);
+				}
+			};
+		},
+
+		toValue: () => uint8ArrayToString(pData)
 	};
 };
 
