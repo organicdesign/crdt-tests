@@ -1,4 +1,4 @@
-import type { SynchronizableCRDT } from "../../crdt-interfaces/src/index.js";
+import { SynchronizableCRDT, getSynchronizerProtocols, getSynchronizer } from "../../crdt-interfaces/src/index.js";
 
 let genSyncId = (() => {
 	let id = 0;
@@ -9,8 +9,8 @@ let genSyncId = (() => {
 export const syncCrdt = (crdt1: SynchronizableCRDT, crdt2: SynchronizableCRDT): number => {
 	const protocols = [
 		...new Set([
-			...crdt1.getSynchronizerProtocols(),
-			...crdt2.getSynchronizerProtocols()]
+			...getSynchronizerProtocols(crdt1),
+			...getSynchronizerProtocols(crdt2)]
 		).values()
 	];
 
@@ -18,8 +18,8 @@ export const syncCrdt = (crdt1: SynchronizableCRDT, crdt2: SynchronizableCRDT): 
 		throw new Error("no common synchronize protocols");
 	}
 
-	const synchronizer1 = crdt1.getSynchronizer(protocols[0]);
-	const synchronizer2 = crdt2.getSynchronizer(protocols[0]);
+	const synchronizer1 = getSynchronizer(crdt1, protocols[0]);
+	const synchronizer2 = getSynchronizer(crdt2, protocols[0]);
 
 	if (synchronizer1 == null || synchronizer2 == null) {
 		throw new Error("error getting synchronizer protocol");

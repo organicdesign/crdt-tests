@@ -1,4 +1,10 @@
-import type { CreateCRDT, SerializableCRDT, CRDTSerializer } from "../../crdt-interfaces/src/index.js";
+import {
+	CreateCRDT,
+	SerializableCRDT,
+	CRDTSerializer,
+	getSerializer,
+	getSerializerProtocols
+} from "../../crdt-interfaces/src/index.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createSerializeTest = <T extends SerializableCRDT=SerializableCRDT>(
@@ -10,7 +16,7 @@ export const createSerializeTest = <T extends SerializableCRDT=SerializableCRDT>
 	const getSerializers = (crdts: SerializableCRDT[]): CRDTSerializer[] => {
 		const protocols = [
 			...new Set(
-				crdts.map(c => c.getSerializeProtocols()).reduce((p, c) => [...c, ...p], [])
+				crdts.map(c => getSerializerProtocols(c)).reduce((p, c) => [...c, ...p], [])
 			).values()
 		];
 
@@ -18,12 +24,12 @@ export const createSerializeTest = <T extends SerializableCRDT=SerializableCRDT>
 			throw new Error("no common synchronize protocols");
 		}
 
-		return crdts.map(c => c.getSerializer(protocols[0])).filter(s => s != null) as CRDTSerializer[];
+		return crdts.map(c => getSerializer(c, protocols[0])).filter(s => s != null) as CRDTSerializer[];
 	};
 
 	it(`Serializes an empty ${name} to Uint8Array`, () => {
 		const crdt = create({ id: uint8ArrayFromString("test") });
-		const data = crdt.getSerializer(crdt.getSerializeProtocols()[0] ?? "")?.serialize();
+		const data = [...crdt.getSerializers()][0]?.serialize();
 
 		expect(data).toBeInstanceOf(Uint8Array);
 	});
@@ -33,7 +39,7 @@ export const createSerializeTest = <T extends SerializableCRDT=SerializableCRDT>
 
 		action(crdt as T, 0);
 
-		const data = crdt.getSerializer(crdt.getSerializeProtocols()[0] ?? "")?.serialize();
+		const data = [...crdt.getSerializers()][0]?.serialize();
 
 		expect(data).toBeInstanceOf(Uint8Array);
 	});

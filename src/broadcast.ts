@@ -1,5 +1,10 @@
 import { jest } from "@jest/globals";
-import type { CreateCRDT, BroadcastableCRDT } from "../../crdt-interfaces/src/index.js";
+import {
+	CreateCRDT,
+	BroadcastableCRDT,
+	getBroadcasterProtocols,
+	getBroadcaster
+} from "../../crdt-interfaces/src/index.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRDT>(
@@ -26,8 +31,8 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 					continue;
 				}
 
-				for (const protocol of rCrdt.getBroadcastProtocols()) {
-					rCrdt.getBroadcaster(protocol)?.onBroadcast(data)
+				for (const protocol of getBroadcasterProtocols(rCrdt)) {
+					getBroadcaster(rCrdt, protocol)?.onBroadcast(data)
 				}
 			}
 		};
@@ -35,8 +40,8 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 		for (let i = 1; i <= count; i++) {
 			const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
 
-			for (const protocol of crdt.getBroadcastProtocols()) {
-				crdt.getBroadcaster(protocol)?.setBroadcast(createBroadcast(crdt))
+			for (const protocol of getBroadcasterProtocols(crdt)) {
+				getBroadcaster(crdt, protocol)?.setBroadcast(createBroadcast(crdt))
 			}
 
 			crdts.push(crdt);
@@ -60,8 +65,8 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 		const crdt = create({ id: uint8ArrayFromString("test") });
 		const times = 5;
 
-		for (const protocol of crdt.getBroadcastProtocols()) {
-			crdt.getBroadcaster(protocol)?.setBroadcast(broadcast)
+		for (const protocol of getBroadcasterProtocols(crdt)) {
+			getBroadcaster(crdt, protocol)?.setBroadcast(broadcast)
 		}
 
 		for (let i = 0; i < times; i++) {

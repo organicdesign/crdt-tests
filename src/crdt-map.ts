@@ -1,6 +1,12 @@
 import { createCRDTTest } from "./crdt.js";
 import { generateNumber } from "./generate-data.js";
-import type { MMap, CRDT, SynchronizableCRDT, BroadcastableCRDT, CreateCRDT } from "../../crdt-interfaces/src/index.js";
+import {
+	MMap,
+	CRDT,
+	SynchronizableCRDT,
+	BroadcastableCRDT,
+	CreateCRDT
+} from "../../crdt-interfaces/src/index.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 import { toString as uint8ArrayToString } from "uint8arrays/to-string";
 
@@ -34,12 +40,8 @@ const createDummyCRDT = (): SynchronizableCRDT & BroadcastableCRDT & Actionable 
 			}
 		},
 
-		getSynchronizerProtocols() {
-			return ["/test"];
-		},
-
-		getSynchronizer (_: string) {
-			return {
+		getSynchronizers () {
+			return [{
 				protocol: "/test",
 				sync (data?: Uint8Array): Uint8Array | undefined {
 					if (data == null) {
@@ -48,15 +50,11 @@ const createDummyCRDT = (): SynchronizableCRDT & BroadcastableCRDT & Actionable 
 
 					update(data);
 				}
-			};
+			}];
 		},
 
-		getBroadcastProtocols() {
-			return ["/test"];
-		},
-
-		getBroadcaster (_: string) {
-			return {
+		getBroadcasters () {
+			return [{
 				protocol: "/test",
 
 				setBroadcast (broadcaster) {
@@ -66,7 +64,7 @@ const createDummyCRDT = (): SynchronizableCRDT & BroadcastableCRDT & Actionable 
 				onBroadcast (data: Uint8Array): void {
 					update(data);
 				}
-			};
+			}];
 		},
 
 		toValue: () => uint8ArrayToString(pData)
