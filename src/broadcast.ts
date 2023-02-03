@@ -32,7 +32,7 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 				}
 
 				for (const protocol of getBroadcasterProtocols(rCrdt)) {
-					getBroadcaster(rCrdt, protocol)?.onBroadcast(data)
+					getBroadcaster(rCrdt, protocol)?.onBroadcast(data);
 				}
 			}
 		};
@@ -41,7 +41,7 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 			const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
 
 			for (const protocol of getBroadcasterProtocols(crdt)) {
-				getBroadcaster(crdt, protocol)?.setBroadcast(createBroadcast(crdt))
+				getBroadcaster(crdt, protocol)?.setBroadcast(createBroadcast(crdt));
 			}
 
 			crdts.push(crdt);
@@ -66,7 +66,7 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 		const times = 5;
 
 		for (const protocol of getBroadcasterProtocols(crdt)) {
-			getBroadcaster(crdt, protocol)?.setBroadcast(broadcast)
+			getBroadcaster(crdt, protocol)?.setBroadcast(broadcast);
 		}
 
 		for (let i = 0; i < times; i++) {
