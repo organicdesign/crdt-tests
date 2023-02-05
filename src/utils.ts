@@ -10,8 +10,8 @@ export const syncCrdt = (crdt1: SynchronizableCRDT, crdt2: SynchronizableCRDT): 
 	const protocols = [
 		...new Set([
 			...getSynchronizerProtocols(crdt1),
-			...getSynchronizerProtocols(crdt2)]
-		).values()
+			...getSynchronizerProtocols(crdt2)
+		]).values()
 	];
 
 	if (protocols.length === 0) {
