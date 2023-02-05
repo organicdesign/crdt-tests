@@ -14,3 +14,6 @@ export { createLWWMapTest } from "./lww-map.js";
 export { createLWWRegisterTest } from "./lww-register.js";
 export { createMVRegisterTest } from "./mv-register.js";
 export { createPNCounterTest } from "./pn-counter.js";
+
+//
+export * from "./mock-crdt.js";
