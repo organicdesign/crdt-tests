@@ -45,7 +45,7 @@ This test is a general CRDT test for CRDTs conforming to the CRDT interface. Thi
 ### Sync
 
 ```javascript
-import { createSyncTest } from "@organicdesign/crdt-tests";
+import { createSyncronizeTest } from "@organicdesign/crdt-tests";
 ```
 
 This test checks that the synchronization functionality of a CRDT works.

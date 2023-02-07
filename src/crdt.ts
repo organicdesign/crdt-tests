@@ -9,7 +9,7 @@ import {
 	isBroadcastable
 } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
-import { createSyncTest } from "./sync.js";
+import { createSyncronizeTest } from "./synchronize.js";
 import { createSerializeTest } from "./serialize.js";
 import { createBroadcastTest } from "./broadcast.js";
 
@@ -21,7 +21,7 @@ export const createCRDTTest = <T extends CRDT=CRDT>(
 
 	if (isSynchronizable(dummy)) {
 		describe("Sync", () => {
-			createSyncTest(
+			createSyncronizeTest(
 				create as unknown as CreateCRDT<SynchronizableCRDT>,
 				action as unknown as (crdt: SynchronizableCRDT, index: number) => void
 			);

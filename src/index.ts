@@ -1,7 +1,7 @@
 // Feature tests.
 export { createBroadcastTest } from "./broadcast.js";
 export { createSerializeTest } from "./serialize.js";
-export { createSyncTest } from "./sync.js";
+export { createSyncronizeTest } from "./synchronize.js";
 
 // General CRDT tests.
 export { createCRDTTest } from "./crdt.js";
