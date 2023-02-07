@@ -158,3 +158,6 @@ Type tests:
 - [ ] LWW-Register type specific tests.
 - [ ] LWW-Map type specific tests.
 - [ ] CRDT-Map type specific tests.
+
+Other:
+- [ ] Custom logger.
