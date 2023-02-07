@@ -1,6 +1,6 @@
-import { syncCrdts } from "./utils.js";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
-export const createSyncTest = (create, action, instanceCount) => {
+import { syncCrdts } from "./utils.js";
+export const createSyncronizeTest = (create, action, instanceCount) => {
     if (instanceCount == null) {
         instanceCount = 20;
     }

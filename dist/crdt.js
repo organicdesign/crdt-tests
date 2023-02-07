@@ -1,18 +1,21 @@
-import { createSyncTest } from "./sync.js";
+import { isSerializable, isSynchronizable, isBroadcastable } from "@organicdesign/crdt-interfaces";
+import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
+import { createSyncronizeTest } from "./synchronize.js";
 import { createSerializeTest } from "./serialize.js";
 import { createBroadcastTest } from "./broadcast.js";
-import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 export const createCRDTTest = (create, action) => {
-    describe("Sync", () => {
-        createSyncTest(create, action);
-    });
     const dummy = create({ id: uint8ArrayFromString("dummy") });
-    if (dummy.addBroadcaster != null && dummy.onBroadcast != null) {
+    if (isSynchronizable(dummy)) {
+        describe("Sync", () => {
+            createSyncronizeTest(create, action);
+        });
+    }
+    if (isBroadcastable(dummy)) {
         describe("Broadcast", () => {
             createBroadcastTest(create, action);
         });
     }
-    if (dummy.serialize != null && dummy.deserialize != null) {
+    if (isSerializable(dummy)) {
         describe("Serialization", () => {
             createSerializeTest(create, action);
         });

@@ -1,6 +1,6 @@
 export { createBroadcastTest } from "./broadcast.js";
 export { createSerializeTest } from "./serialize.js";
-export { createSyncTest } from "./sync.js";
+export { createSyncronizeTest } from "./synchronize.js";
 export { createCRDTTest } from "./crdt.js";
 export { createCRDTMapTest } from "./crdt-map.js";
 export { createGCounterTest } from "./g-counter.js";
@@ -9,3 +9,5 @@ export { createLWWMapTest } from "./lww-map.js";
 export { createLWWRegisterTest } from "./lww-register.js";
 export { createMVRegisterTest } from "./mv-register.js";
 export { createPNCounterTest } from "./pn-counter.js";
+export * from "./mock-crdt.js";
+export * from "./mock-crdt-map.js";
