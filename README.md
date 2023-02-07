@@ -18,7 +18,7 @@ Tests for CRDTs implementing `@organicdesign/crdt-interfaces`.
   - [LWW-Register](#lww-register)
   - [LWW-Map](#lww-map)
   - [CRDT-Map](#crdt-map)
-- [TODO](#todo)
+- [To-Do](#to-do)
 
 ## Install
 
@@ -136,9 +136,16 @@ import { createLWWMapTest } from "@organicdesign/crdt-tests";
 
 This test is for a CRDT-Map CRDT that implements the CRDT & MMap interfaces.
 
-## TODO
+## To-Do
 
-- [x] MV-Register generic test.
+This package contains basic testing systems for CRDTs but there probably are better ways to setup the tests (espicially after the interfaces version 4.0.0 change), contribution would be most welcome to improve these tests.
+
+Module tests:
+- [ ] Synchronizer tests.
+- [ ] Serializer tests.
+- [ ] Broadcaster tests.
+
+Type tests:
 - [ ] MV-Register register specific methods tests.
 - [ ] G-Set set specific methods tests.
 - [ ] LWW-Register register specific methods tests.
