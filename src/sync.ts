@@ -1,6 +1,6 @@
-import { syncCrdts } from "./utils.js";
-import { SynchronizableCRDT, CreateCRDT } from "../../crdt-interfaces/src/index.js";
+import { SynchronizableCRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
+import { syncCrdts } from "./utils.js";
 
 export const createSyncTest = <T extends SynchronizableCRDT=SynchronizableCRDT>(
 	create: CreateCRDT<T>,

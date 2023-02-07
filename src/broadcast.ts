@@ -4,7 +4,7 @@ import {
 	BroadcastableCRDT,
 	getBroadcasterProtocols,
 	getBroadcaster
-} from "../../crdt-interfaces/src/index.js";
+} from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 
 export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRDT>(

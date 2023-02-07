@@ -1,6 +1,6 @@
+import type { BMap, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
 import { createCRDTTest } from "./crdt.js";
 import { generateAll } from "./generate-data.js";
-import type { BMap, CRDT, CreateCRDT } from "../../crdt-interfaces/src/index.js";
 
 export const createLWWMapTest = (
 	create: CreateCRDT<BMap<unknown> & CRDT>

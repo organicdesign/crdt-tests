@@ -1,14 +1,14 @@
-import { createCRDTTest } from "./crdt.js";
-import { generateNumber } from "./generate-data.js";
 import {
 	MMap,
 	CRDT,
 	SynchronizableCRDT,
 	BroadcastableCRDT,
 	CreateCRDT
-} from "../../crdt-interfaces/src/index.js";
+} from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 import { toString as uint8ArrayToString } from "uint8arrays/to-string";
+import { createCRDTTest } from "./crdt.js";
+import { generateNumber } from "./generate-data.js";
 
 interface Actionable {
 	action (index: number): void

@@ -1,6 +1,6 @@
+import type { MVRegister, CRDT, CreateCRDT } from "@organicdesign/crdt-interfaces";
 import { createCRDTTest } from "./crdt.js";
 import { generateAll } from "./generate-data.js";
-import type { MVRegister, CRDT, CreateCRDT } from "../../crdt-interfaces/src/index.js";
 
 export const createMVRegisterTest = (
 	create: CreateCRDT<MVRegister<unknown> & CRDT>

@@ -1,6 +1,3 @@
-import { createSyncTest } from "./sync.js";
-import { createSerializeTest } from "./serialize.js";
-import { createBroadcastTest } from "./broadcast.js";
 import {
 	CRDT,
 	SynchronizableCRDT,
@@ -10,8 +7,11 @@ import {
 	isSerializable,
 	isSynchronizable,
 	isBroadcastable
-} from "../../crdt-interfaces/src/index.js";
+} from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
+import { createSyncTest } from "./sync.js";
+import { createSerializeTest } from "./serialize.js";
+import { createBroadcastTest } from "./broadcast.js";
 
 export const createCRDTTest = <T extends CRDT=CRDT>(
 	create: CreateCRDT<T>,

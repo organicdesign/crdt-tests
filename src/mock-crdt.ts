@@ -1,4 +1,4 @@
-import { SynchronizableCRDT, BroadcastableCRDT, SerializableCRDT } from "../../crdt-interfaces/src/index.js";
+import { SynchronizableCRDT, BroadcastableCRDT, SerializableCRDT } from "@organicdesign/crdt-interfaces";
 import { fromString as uint8ArrayFromString } from "uint8arrays/from-string";
 import { toString as uint8ArrayToString } from "uint8arrays/to-string";
 
