@@ -1,3 +1,9 @@
+## [0.4.1](https://github.com/organicdesign/crdt-tests/compare/v0.4.0...v0.4.1) (2023-02-13)
+
+### Fixed
+
+* Fixed outdated built files.
+
 ## [0.4.0](https://github.com/organicdesign/crdt-tests/compare/v0.3.0...v0.4.0) (2023-02-13)
 
 ### Changed

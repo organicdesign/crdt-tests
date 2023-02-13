@@ -3,6 +3,7 @@ import { toString as uint8ArrayToString } from "uint8arrays/to-string";
 let instanceCount = 0;
 export const mockCRDT = () => {
     let pData = new Uint8Array([0]);
+    let started = false;
     const broadcasters = [];
     const update = (data) => {
         if (uint8ArrayToString(data) > uint8ArrayToString(pData)) {
@@ -13,6 +14,15 @@ export const mockCRDT = () => {
     };
     return {
         id: uint8ArrayFromString(`mock-crdt-${instanceCount++}`),
+        isStarted() {
+            return started;
+        },
+        start() {
+            started = true;
+        },
+        stop() {
+            started = false;
+        },
         action: (index) => {
             const data = new Uint8Array([index + 1]);
             update(data);
