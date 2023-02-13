@@ -13,15 +13,17 @@ export const createSyncronizeTest = <T extends SynchronizableCRDT=Synchronizable
 
 	const name = create({ id: uint8ArrayFromString("dummy") }).constructor.name;
 
-	const runSyncTest = (count: number) => {
+	const runSyncTest = async (count: number) => {
 		const crdts: SynchronizableCRDT[] = [];
 
 		for (let i = 1; i <= count; i++) {
-			const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
+			crdts.push(create({ id: uint8ArrayFromString(`test-${i}`) }));
+		}
 
+		await Promise.all(crdts.map(c => c.start()));
+
+		for (const [i, crdt] of crdts.entries()) {
 			action(crdt as T, i);
-
-			crdts.push(crdt);
 		}
 
 		const transfer = syncCrdts(crdts);
@@ -35,11 +37,11 @@ export const createSyncronizeTest = <T extends SynchronizableCRDT=Synchronizable
 		console.info(`Synced ${count} ${name}s in ${transfer} bytes.`);
 	};
 
-	it(`Syncs 2 ${name}s`, () => {
-		runSyncTest(2);
+	it(`Syncs 2 ${name}s`, async () => {
+		await runSyncTest(2);
 	});
 
-	it(`Syncs ${instanceCount} ${name}s`, () => {
-		runSyncTest(20);
+	it(`Syncs ${instanceCount} ${name}s`, async () => {
+		await runSyncTest(20);
 	});
 };

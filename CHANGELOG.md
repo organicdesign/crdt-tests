@@ -1,8 +1,14 @@
+## [0.4.0](https://github.com/organicdesign/crdt-tests/compare/v0.3.0...v0.4.0) (2023-02-13)
+
+### Changed
+
+* Updated interfaces and tests to `@organicdesign/crdt-interfaces@5.0.0`
+
 ## [0.3.0](https://github.com/organicdesign/crdt-tests/compare/v0.2.1...v0.3.0) (2023-02-08)
 
 ### Changed
 
-* Updated interfaces and tests to `@organicdesign/crdt-interfaces@0.4.0`
+* Updated interfaces and tests to `@organicdesign/crdt-interfaces@4.0.0`
 
 ## [0.2.1](https://github.com/organicdesign/crdt-tests/compare/v0.2.0...v0.2.1) (2023-01-17)
 

@@ -21,6 +21,7 @@ let instanceCount = 0;
 export const mockCRDTMap = (
 	createSynchronizer: (components: CRDTMapSyncComponents) => CRDTSynchronizer
 ): SynchronizableCRDT & Actionable => {
+	let started = false;
 	const data = new Map<string, CRDT & Actionable>();
 	const id = uint8ArrayFromString(`mock-crdt-map-${instanceCount}`);
 	const crdtCount = 3;
@@ -37,6 +38,18 @@ export const mockCRDTMap = (
 
 	return {
 		id,
+
+		isStarted() {
+			return started;
+		},
+
+		start () {
+			started = true;
+		},
+
+		stop () {
+			started = false;
+		},
 
 		action: (index: number) => {
 			data.get(`crdt-${index % crdtCount}`)?.action(index);

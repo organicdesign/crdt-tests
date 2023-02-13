@@ -10,6 +10,7 @@ let instanceCount = 0;
 
 export const mockCRDT = (): SynchronizableCRDT & BroadcastableCRDT & SerializableCRDT & Actionable => {
 	let pData = new Uint8Array([0]);
+	let started = false;
 	const broadcasters: ((data: Uint8Array) => void)[] = [];
 
 	const update = (data: Uint8Array) => {
@@ -23,6 +24,18 @@ export const mockCRDT = (): SynchronizableCRDT & BroadcastableCRDT & Serializabl
 
 	return {
 		id: uint8ArrayFromString(`mock-crdt-${instanceCount++}`),
+
+		isStarted () {
+			return started;
+		},
+
+		start () {
+			started = true;
+		},
+
+		stop () {
+			started = false;
+		},
 
 		action: (index: number) => {
 			const data = new Uint8Array([index + 1]);

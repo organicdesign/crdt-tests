@@ -7,16 +7,20 @@ export const createPNCounterTest = (
 	create: CreateCRDT<BCounter & CRDT>
 ) => {
 	describe("Counter", () => {
-		it("Starts at 0", () => {
+		it("Starts at 0", async () => {
 			const counter = create({ id: uint8ArrayFromString("test") });
+
+			await counter.start();
 
 			expect(counter.toValue()).toBe(0);
 		});
 
-		it("Adds integers", () => {
+		it("Adds integers", async () => {
 			const counter = create({ id: uint8ArrayFromString("test") });
 			const integers = [1, -100, 53];
 			const sum = integers.reduce((p, c) => p + c, 0);
+
+			await counter.start();
 
 			for (const integer of integers) {
 				if (integer > 0) {
@@ -29,10 +33,12 @@ export const createPNCounterTest = (
 			expect(counter.toValue()).toBe(sum);
 		});
 
-		it("Adds floats", () => {
+		it("Adds floats", async () => {
 			const counter = create({ id: uint8ArrayFromString("test") });
 			const floats = [1, 100.23, -53.00001, 0.12];
 			const sum = floats.reduce((p, c) => p + c, 0);
+
+			await counter.start();
 
 			for (const float of floats) {
 				if (float > 0) {

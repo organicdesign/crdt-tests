@@ -18,7 +18,7 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 
 	const name = create({ id: uint8ArrayFromString("dummy") }).constructor.name;
 
-	const runBroadcastTest = (count: number) => {
+	const runBroadcastTest = async (count: number) => {
 		const crdts: T[] = [];
 		let transfer = 0;
 
@@ -40,6 +40,8 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 		for (let i = 1; i <= count; i++) {
 			const crdt = create({ id: uint8ArrayFromString(`test-${i}`) });
 
+			await crdt.start();
+
 			for (const protocol of getBroadcasterProtocols(crdt)) {
 				getBroadcaster(crdt, protocol)?.setBroadcast(createBroadcast(crdt));
 			}
@@ -60,10 +62,12 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 		console.info(`Synced ${count} ${name}s over broadcast in ${transfer} bytes.`);
 	};
 
-	it("Broadcasts every time an action is made", () => {
+	it("Broadcasts every time an action is made", async () => {
 		const broadcast = jest.fn();
 		const crdt = create({ id: uint8ArrayFromString("test") });
 		const times = 5;
+
+		await crdt.start();
 
 		for (const protocol of getBroadcasterProtocols(crdt)) {
 			getBroadcaster(crdt, protocol)?.setBroadcast(broadcast);
@@ -76,11 +80,11 @@ export const createBroadcastTest = <T extends BroadcastableCRDT=BroadcastableCRD
 		expect(broadcast).toBeCalledTimes(times);
 	});
 
-	it(`Syncs 2 ${name}s over broadcast`, () => {
-		runBroadcastTest(2);
+	it(`Syncs 2 ${name}s over broadcast`, async () => {
+		await runBroadcastTest(2);
 	});
 
-	it(`Syncs ${instanceCount} ${name}s over broadcast`, () => {
-		runBroadcastTest(instanceCount as number);
+	it(`Syncs ${instanceCount} ${name}s over broadcast`, async () => {
+		await runBroadcastTest(instanceCount as number);
 	});
 };
